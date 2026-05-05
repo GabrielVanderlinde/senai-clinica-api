@@ -56,5 +56,15 @@ public class PacienteController {
         return ResponseEntity.ok().body(resposta);
     }
 
-    //Delete pendente (aguardando Gustavo)
+    //Delete pendente - Falta validar em quesito de consultas
+    @DeleteMapping("paciente/{email}")
+    public ResponseEntity<Boolean> removerPaciente(@PathVariable String email) {
+
+        if (email.equals(service.obterPaciente(email).getEmail())) {
+            return ResponseEntity.ok().body(true);
+        } else {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+    }
 }
