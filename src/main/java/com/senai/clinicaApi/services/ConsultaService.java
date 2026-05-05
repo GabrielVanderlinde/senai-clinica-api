@@ -76,5 +76,4 @@ public class ConsultaService {
 
         return true;
     }
-
 }
