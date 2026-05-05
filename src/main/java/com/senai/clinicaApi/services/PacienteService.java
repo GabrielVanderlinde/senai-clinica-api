@@ -50,14 +50,35 @@ public class PacienteService {
         return true;
     }
 
+    public boolean atualizarPaciente(String email, PacienteDto pacienteDto) {
+        Optional<PacienteEntity> optional = repository.findByEmail(email);
 
-    //public boolean atualizarPaciente(PacienteDto pacienteDto){}
+        if (optional.isEmpty()) {
+            return false;
+        }
+
+        PacienteEntity paciente = optional.get();
+        paciente.setNome(pacienteDto.getNome());
+        paciente.setEmail(paciente.getEmail());
+        repository.save(paciente);
+
+        return true;
+    }
 
     public PacienteEntity obterPaciente(String email) {
         Optional<PacienteEntity> optional = repository.findByEmail(email);
         return optional.orElse(null);
     }
-    //public boolean excluirPaciente(String email){}
 
+    public boolean excluirPaciente(String email) {
+        Optional<PacienteEntity> optional = repository.findByEmail(email);
+
+        if (optional.isEmpty()) {
+            return false;
+        }
+
+        repository.delete(optional.get());
+        return true;
+    }
 
 }
