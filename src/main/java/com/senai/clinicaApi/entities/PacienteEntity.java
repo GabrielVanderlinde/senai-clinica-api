@@ -1,4 +1,4 @@
-package com.senai.clinicaApi.entites;
+package com.senai.clinicaApi.entities;
 
 import jakarta.persistence.*;
 
@@ -10,8 +10,10 @@ public class PacienteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "nome", nullable = false)
     private String nome;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
