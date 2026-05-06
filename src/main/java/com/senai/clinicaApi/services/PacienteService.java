@@ -1,7 +1,7 @@
 package com.senai.clinicaApi.services;
 
 import com.senai.clinicaApi.dtos.PacienteDto;
-import com.senai.clinicaApi.entites.PacienteEntity;
+import com.senai.clinicaApi.entities.PacienteEntity;
 import com.senai.clinicaApi.repositories.PacienteRepository;
 import org.springframework.stereotype.Service;
 

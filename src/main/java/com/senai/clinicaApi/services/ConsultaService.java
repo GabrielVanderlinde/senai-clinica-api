@@ -4,7 +4,9 @@ import com.senai.clinicaApi.dtos.ConsultaDto;
 import com.senai.clinicaApi.entities.ConsultaEntity;
 import com.senai.clinicaApi.entities.PacienteEntity;
 import com.senai.clinicaApi.repositories.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,36 +46,71 @@ public class ConsultaService {
     //inserir
     public boolean inserirConsulta(ConsultaDto consultaDto){
 
-        //validacao, se existe um usuario com esse email
+        //verifica se existe paciente pelo email
+        PacienteEntity paciente = pacienteRepository
+                .findByEmail(consultaDto.getEmailPaciente())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Paciente não encontrado"
+                ));
 
-        Optional<PacienteEntity> paciente = pacienteRepository.findByEmail(consultaDto.getEmailPaciente());
 
-        // 🔥 REGRA 10
-        if (paciente.isEmpty()){
-            return false;
+        //verifica se consulta ja ta marcada no mesmo dia
+        if (consultaRepository.existsByPacienteAndDataConsulta(
+                paciente, consultaDto.getDataConsulta())) {
+
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "Já existe consulta nessa data"
+            );
         }
-
-        PacienteEntity pacienteGet = paciente.get();
-
-
-        List<PacienteEntity> listaPaciente = pacienteRepository.findAll();
 
         ConsultaEntity consultaEntity = new ConsultaEntity();
 
-        consultaEntity.setId(consultaDto.getId());
         consultaEntity.setTitulo(consultaDto.getTitulo());
         consultaEntity.setDataConsulta(consultaDto.getDataConsulta());
         consultaEntity.setStatusConsulta(consultaDto.getStatusConsulta());
-
-        consultaEntity.setPaciente(pacienteGet);
-//        for (PacienteEntity paciente : listaPaciente){
-//            if(paciente.getEmail().equals(consultaDto.getEmailPaciente())){
-//                consultaEntity.setPaciente(paciente);
-//            }
-//        }
+        consultaEntity.setPaciente(paciente);
 
         consultaRepository.save(consultaEntity);
 
         return true;
     }
+
+    public boolean atualizarConsulta(long id, ConsultaDto dto){
+
+        ConsultaEntity consulta = consultaRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Consulta não encontrada"
+                ));
+
+
+        PacienteEntity paciente = pacienteRepository
+                .findByEmail(dto.getEmailPaciente())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Paciente não encontrado"
+                ));
+
+        if (consultaRepository.existsByPacienteAndDataConsulta(
+                paciente, dto.getDataConsulta())) {
+
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "Já existe consulta nessa data"
+            );
+        }
+
+        consulta.setTitulo(dto.getTitulo());
+        consulta.setDataConsulta(dto.getDataConsulta());
+        consulta.setStatusConsulta(dto.getStatusConsulta());
+        consulta.setPaciente(paciente);
+
+        consultaRepository.save(consulta);
+
+        return true;
+    }
+
+    public boolean excluirConsulta(long id){
+        consultaRepository.deleteById(id);
+        return true;
+    }
+
 }

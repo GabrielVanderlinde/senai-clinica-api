@@ -1,7 +1,7 @@
 package com.senai.clinicaApi.controllers;
 
 import com.senai.clinicaApi.dtos.PacienteDto;
-import com.senai.clinicaApi.entites.PacienteEntity;
+import com.senai.clinicaApi.entities.PacienteEntity;
 import com.senai.clinicaApi.services.PacienteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class PacienteController {
     }
 
     //Methods
-    @PostMapping("/paciente")
+    @PostMapping
     public ResponseEntity<Boolean> cadastrarPaciente(@RequestBody PacienteDto pacienteDto) {
         Boolean resposta = service.inserirPaciente(pacienteDto);
 
