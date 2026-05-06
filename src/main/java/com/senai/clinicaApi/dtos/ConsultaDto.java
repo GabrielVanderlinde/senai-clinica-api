@@ -1,8 +1,6 @@
 package com.senai.clinicaApi.dtos;
 
-import com.senai.clinicaApi.entities.PacienteEntity;
 import com.senai.clinicaApi.entities.StatusConsulta;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 

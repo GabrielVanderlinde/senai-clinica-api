@@ -10,7 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ConsultaService {
@@ -23,13 +22,13 @@ public class ConsultaService {
         this.pacienteRepository = pacienteRepository;
     }
 
-    public List<ConsultaDto> obterConsulta(){
+    public List<ConsultaDto> obterConsulta() {
 
         List<ConsultaEntity> listaConsulta = consultaRepository.findAll();
 
         List<ConsultaDto> listaDto = new ArrayList<>();
 
-        for(ConsultaEntity entity : listaConsulta){
+        for (ConsultaEntity entity : listaConsulta) {
             ConsultaDto consulta = new ConsultaDto();
 
             consulta.setId(entity.getId());
@@ -44,7 +43,7 @@ public class ConsultaService {
     }
 
     //inserir
-    public boolean inserirConsulta(ConsultaDto consultaDto){
+    public boolean inserirConsulta(ConsultaDto consultaDto) {
 
         //verifica se existe paciente pelo email
         PacienteEntity paciente = pacienteRepository
@@ -75,7 +74,7 @@ public class ConsultaService {
         return true;
     }
 
-    public boolean atualizarConsulta(long id, ConsultaDto dto){
+    public boolean atualizarConsulta(long id, ConsultaDto dto) {
 
         ConsultaEntity consulta = consultaRepository
                 .findById(id)
@@ -104,7 +103,7 @@ public class ConsultaService {
         return true;
     }
 
-    public boolean excluirConsulta(long id){
+    public boolean excluirConsulta(long id) {
         consultaRepository.deleteById(id);
         return true;
     }

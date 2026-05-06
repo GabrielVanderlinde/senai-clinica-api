@@ -1,7 +1,6 @@
 package com.senai.clinicaApi.controllers;
 
 import com.senai.clinicaApi.dtos.PacienteDto;
-import com.senai.clinicaApi.entities.PacienteEntity;
 import com.senai.clinicaApi.services.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
