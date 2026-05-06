@@ -3,6 +3,7 @@ package com.senai.clinicaApi.controllers;
 import com.senai.clinicaApi.dtos.PacienteDto;
 import com.senai.clinicaApi.entities.PacienteEntity;
 import com.senai.clinicaApi.services.PacienteService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,48 +14,43 @@ import java.util.List;
 public class PacienteController {
 
     //Injeção de Dependências
-    private PacienteService service;
+    private final PacienteService service;
 
     public PacienteController(PacienteService service) {
+        this.service = service;
     }
 
     //Methods
     @PostMapping
-    public ResponseEntity<Boolean> cadastrarPaciente(@RequestBody PacienteDto pacienteDto) {
-        Boolean resposta = service.inserirPaciente(pacienteDto);
-
-        if (!resposta) {
-            return ResponseEntity.badRequest().body(resposta);
-        }
-
-        return ResponseEntity.ok().body(resposta);
+    public ResponseEntity<Object> cadastrarPaciente(@RequestBody @Valid PacienteDto pacienteDto) {
+        boolean resposta = service.inserirPaciente(pacienteDto);
+        if (!resposta) return ResponseEntity.status(409).body("Já existe paciente");
+        return ResponseEntity.ok().body("Paciente inserido com sucesso!");
     }
 
-    @GetMapping("/pacientes")
-    public ResponseEntity<List<PacienteDto>> listarPacientes() {
+    @GetMapping()
+    public ResponseEntity<Object> listarPacientes() {
         List<PacienteDto> pacientes = service.obterPacientes();
+        if (pacientes.isEmpty()) return ResponseEntity.status(404).body("Lista vazia de pacientes");
         return ResponseEntity.ok(pacientes);
     }
 
-    @GetMapping("paciente/{email}")
-    public ResponseEntity<String> obterPacientePorEmail(@PathVariable String email) {
-        PacienteEntity paciente = service.obterPaciente(email);
 
-        if (paciente == null) {
-            return ResponseEntity.status(400).body("Paciente com email :" + email + " não encontrado.");
-        }
-        return null;
+    @PutMapping("/{email}")
+    public ResponseEntity<Object> atualizarPaciente(@PathVariable @Valid String email, @RequestBody PacienteDto pacienteDto) {
+        boolean resposta = service.atualizarPaciente(email, pacienteDto);
+        if (!resposta) return ResponseEntity.status(404).body("Paciente não encontrado.");
+        return ResponseEntity.ok().body("Paciente atualizado com sucesso!");
     }
 
-    @PutMapping("/paciente/{email}")
-    public ResponseEntity<Boolean> atualizarPaciente(@PathVariable String email, @RequestBody PacienteDto pacienteDto) {
-        Boolean resposta = service.atualizarPaciente(email, pacienteDto);
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Object> excluirPaciente(@PathVariable String email) {
 
-        if (!resposta) {
-            return ResponseEntity.badRequest().body(resposta);
-        }
-        return ResponseEntity.ok().body(resposta);
+        if (service.obterPaciente(email) == null) return ResponseEntity.status(404).body("Paciente não existe");
+        boolean resposta = service.excluirPaciente(email);
+
+        if (!resposta) return ResponseEntity.status(409).body("Paciente vinculado em consultas");
+        return ResponseEntity.ok("Paciente excluído com sucesso");
+
     }
-
-    //Delete pendente (aguardando Gustavo)
 }
