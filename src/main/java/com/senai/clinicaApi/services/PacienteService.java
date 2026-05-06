@@ -2,6 +2,7 @@ package com.senai.clinicaApi.services;
 
 import com.senai.clinicaApi.dtos.PacienteDto;
 import com.senai.clinicaApi.entities.PacienteEntity;
+import com.senai.clinicaApi.repositories.ConsultaRepository;
 import com.senai.clinicaApi.repositories.PacienteRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class PacienteService {
 
     private final PacienteRepository repository;
+    private final ConsultaRepository consultaRepository;
 
     //Constructor
-    public PacienteService(PacienteRepository repository) {
+    public PacienteService(PacienteRepository repository, ConsultaRepository consultaRepository) {
         this.repository = repository;
+        this.consultaRepository = consultaRepository;
     }
 
     //Lista de Pacientes
@@ -45,7 +48,7 @@ public class PacienteService {
 
         PacienteEntity paciente = new PacienteEntity();
         paciente.setNome(pacienteDto.getNome());
-        paciente.setEmail(paciente.getEmail());
+        paciente.setEmail(pacienteDto.getEmail());
         repository.save(paciente);
         return true;
     }
@@ -59,7 +62,7 @@ public class PacienteService {
 
         PacienteEntity paciente = optional.get();
         paciente.setNome(pacienteDto.getNome());
-        paciente.setEmail(paciente.getEmail());
+        paciente.setEmail(pacienteDto.getEmail());
         repository.save(paciente);
 
         return true;
@@ -73,9 +76,13 @@ public class PacienteService {
     public boolean excluirPaciente(String email) {
         Optional<PacienteEntity> optional = repository.findByEmail(email);
 
-        if (optional.isEmpty()) {
+        if (optional.isEmpty()) return false;
+
+        //Verifica Consultas Vinculadas
+        if (consultaRepository.existsByPaciente(optional.get())) {
             return false;
         }
+
 
         repository.delete(optional.get());
         return true;
