@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/consulta")
 public class ConsultaController {
     private ConsultaService service;
 

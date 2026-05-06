@@ -90,12 +90,8 @@ public class ConsultaService {
                         HttpStatus.NOT_FOUND, "Paciente não encontrado"
                 ));
 
-        if (consultaRepository.existsByPacienteAndDataConsulta(
-                paciente, dto.getDataConsulta())) {
-
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT, "Já existe consulta nessa data"
-            );
+        if (consultaRepository.existsByPacienteAndDataConsultaAndIdNot(paciente, dto.getDataConsulta(), id)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Já existe consulta nessa data");
         }
 
         consulta.setTitulo(dto.getTitulo());
