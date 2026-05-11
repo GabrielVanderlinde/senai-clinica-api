@@ -30,7 +30,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"nome\": \"Ana Silva\",\n    \"email\": \"ana@email.com\"\n}",
+              "raw": "{\n    \"nome\": \"rodrigo\",\n    \"email\": \"rodrigo@email.com\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -53,7 +53,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"nome\": \"Ana Silva Atualizada\",\n    \"email\": \"ana_nova@email.com\"\n}\n",
+              "raw": "{\n    \"nome\": \"Rodrigo Silva\",\n    \"email\": \"rodrigo_novo@email.com\"\n}\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -61,12 +61,12 @@
               }
             },
             "url": {
-              "raw": "{{PacienteURL}}/ana@email.com",
+              "raw": "{{PacienteURL}}/rodrigo@email.com",
               "host": [
                 "{{PacienteURL}}"
               ],
               "path": [
-                "ana@email.com"
+                "rodrigo@email.com"
               ]
             }
           },
@@ -78,13 +78,12 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{PacienteURL}}ana@email.com",
-              "auth": {
-                "user": "{{PacienteURL}}ana"
-              },
+              "raw": "{{PacienteURL}}/rodrigo_novo@email.com",
               "host": [
-                "email",
-                "com"
+                "{{PacienteURL}}"
+              ],
+              "path": [
+                "rodrigo_novo@email.com"
               ]
             }
           },
@@ -119,7 +118,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"titulo\": \"Consulta Geral\",\n    \"dataConsulta\": \"2026-05-20\",\n    \"statusConsulta\": \"AGENDADA\",\n    \"emailPaciente\": \"ana@email.com\"\n}",
+              "raw": "{\n    \"titulo\": \"Consulta Teste\",\n    \"dataConsulta\": \"2026-05-12\",\n    \"statusConsulta\": \"AGENDADA\",\n    \"emailPaciente\": \"rodrigo_novo@email.com\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -142,7 +141,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"titulo\": \"Consulta Atualizada\",\n    \"dataConsulta\": \"2026-05-21\",\n    \"statusConsulta\": \"EM_ANDAMENTO\",\n    \"emailPaciente\": \"ana@email.com\"\n}",
+              "raw": "{\n    \"titulo\": \"Consulta Atualizada\",\n    \"dataConsulta\": \"2026-05-21\",\n    \"statusConsulta\": \"EM_ANDAMENTO\",\n    \"emailPaciente\": \"rodrigo_novo@email.com\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -150,12 +149,12 @@
               }
             },
             "url": {
-              "raw": "{{ConsultaURL}}/1",
+              "raw": "{{ConsultaURL}}/8",
               "host": [
                 "{{ConsultaURL}}"
               ],
               "path": [
-                "1"
+                "8"
               ]
             }
           },
@@ -167,12 +166,12 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{ConsultaURL}}/1",
+              "raw": "{{ConsultaURL}}/8",
               "host": [
                 "{{ConsultaURL}}"
               ],
               "path": [
-                "1"
+                "8"
               ]
             }
           },
