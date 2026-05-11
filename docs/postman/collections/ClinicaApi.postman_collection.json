@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "52de470f-d965-41e3-9fa6-d58a8bd7b74e",
+    "_postman_id": "8894463c-a7da-4c76-afd7-400e1d5a17ce",
     "name": "ClinicaApi",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "51739385"
@@ -172,24 +172,6 @@
               ],
               "path": [
                 "8"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Filtrar Consultas Status",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{ConsultaURL}}/filtro/agendada",
-              "host": [
-                "{{ConsultaURL}}"
-              ],
-              "path": [
-                "filtro",
-                "agendada"
               ]
             }
           },
