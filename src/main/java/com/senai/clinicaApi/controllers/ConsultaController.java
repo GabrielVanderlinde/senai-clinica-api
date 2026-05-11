@@ -1,7 +1,6 @@
 package com.senai.clinicaApi.controllers;
 
 import com.senai.clinicaApi.dtos.ConsultaDto;
-import com.senai.clinicaApi.entities.StatusConsulta;
 import com.senai.clinicaApi.services.ConsultaService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +22,6 @@ public class ConsultaController {
     public ResponseEntity<Object> listarConsultas() {
         List<ConsultaDto> consultas = service.obterConsulta();
         if (consultas.isEmpty()) return ResponseEntity.status(404).body("Lista Vazia de Consultas");
-        return ResponseEntity.ok(consultas);
-    }
-
-    @GetMapping("/filtro/{status}")
-    public ResponseEntity<? extends Object> filtrarConsultas(@PathVariable("status") String status) {
-        List<ConsultaDto> consultas = service.obterConsultaPorStatus(StatusConsulta.valueOf(status.toUpperCase()));
-        if (consultas.isEmpty()) return ResponseEntity.status(404).body("Nenhuma consulta encontrada com este status.");
         return ResponseEntity.ok(consultas);
     }
 
