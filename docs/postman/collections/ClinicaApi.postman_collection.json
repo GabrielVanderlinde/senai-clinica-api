@@ -176,6 +176,24 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Filtrar Consultas Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ConsultaURL}}/filtro/agendada",
+              "host": [
+                "{{ConsultaURL}}"
+              ],
+              "path": [
+                "filtro",
+                "agendada"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     }
