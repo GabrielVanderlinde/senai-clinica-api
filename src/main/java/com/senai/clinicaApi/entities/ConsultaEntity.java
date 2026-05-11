@@ -14,10 +14,10 @@ public class ConsultaEntity {
     @Column(name = "titulo")
     private String titulo;
 
-    @Column(name = "dataConsulta")
+    @Column(name = "data_consulta")
     private LocalDate dataConsulta;
 
-    @Column(name = "statusConsulta")
+    @Column(name = "status_consulta")
     @Enumerated(EnumType.STRING)
     private StatusConsulta statusConsulta;
 

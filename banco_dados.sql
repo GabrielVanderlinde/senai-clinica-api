@@ -3,6 +3,14 @@
 -- SENAI - Tecnico em Desenvolvimento de Sistemas
 -- ================================================
 
+-- ESSA LINHA APAGA O BANCO ANTIGO (COM OS DADOS DUPLICADOS) PARA COMEÇAR DO ZERO
+DROP DATABASE IF EXISTS clinica_api;
+
+-- ================================================
+-- CRIACAO DO BANCO DE DADOS - Clinica API
+-- SENAI - Tecnico em Desenvolvimento de Sistemas
+-- ================================================
+
 CREATE DATABASE IF NOT EXISTS clinica_api;
 USE clinica_api;
 
@@ -30,26 +38,26 @@ CREATE TABLE IF NOT EXISTS consulta (
 -- ================================================
 -- 5 PACIENTES DE TESTE
 -- ================================================
-INSERT INTO paciente (nome, email) VALUES ('Ana Silva',      'ana@email.com');
-INSERT INTO paciente (nome, email) VALUES ('Bruno Costa',    'bruno@email.com');
-INSERT INTO paciente (nome, email) VALUES ('Carla Souza',    'carla@email.com');
-INSERT INTO paciente (nome, email) VALUES ('Diego Alves',    'diego@email.com');
-INSERT INTO paciente (nome, email) VALUES ('Elena Martins',  'elena@email.com');
+INSERT INTO paciente (nome, email) VALUES ('Ana Silva',      'anasilva@email.com');
+INSERT INTO paciente (nome, email) VALUES ('Bruno Costa',    'brunocosta@email.com');
+INSERT INTO paciente (nome, email) VALUES ('Carla Souza',    'carlasouza@email.com');
+INSERT INTO paciente (nome, email) VALUES ('Diego Alves',    'diegoalves@email.com');
+INSERT INTO paciente (nome, email) VALUES ('Elena Martins',  'elenamartins@email.com');
 
 -- ================================================
 -- 7 CONSULTAS DE TESTE
 -- ================================================
-INSERT INTO consulta (titulo, data_consulta, status, paciente_id)
+INSERT INTO consulta (titulo, data_consulta, status_consulta, paciente_id)
     VALUES ('Consulta Geral',      '2026-05-10', 'AGENDADA',     1);
-INSERT INTO consulta (titulo, data_consulta, status, paciente_id)
+INSERT INTO consulta (titulo, data_consulta, status_consulta, paciente_id)
     VALUES ('Retorno Cardiaco',    '2026-05-12', 'AGENDADA',     2);
-INSERT INTO consulta (titulo, data_consulta, status, paciente_id)
+INSERT INTO consulta (titulo, data_consulta, status_consulta, paciente_id)
     VALUES ('Exame de Sangue',     '2026-05-13', 'EM_ANDAMENTO', 3);
-INSERT INTO consulta (titulo, data_consulta, status, paciente_id)
+INSERT INTO consulta (titulo, data_consulta, status_consulta, paciente_id)
     VALUES ('Check-up Anual',      '2026-05-14', 'AGENDADA',     4);
-INSERT INTO consulta (titulo, data_consulta, status, paciente_id)
+INSERT INTO consulta (titulo, data_consulta, status_consulta, paciente_id)
     VALUES ('Consulta Pediatra',   '2026-05-15', 'CONCLUIDA',    5);
-INSERT INTO consulta (titulo, data_consulta, status, paciente_id)
+INSERT INTO consulta (titulo, data_consulta, status_consulta, paciente_id)
     VALUES ('Dermatologia',        '2026-05-16', 'AGENDADA',     1);
-INSERT INTO consulta (titulo, data_consulta, status, paciente_id)
+INSERT INTO consulta (titulo, data_consulta, status_consulta, paciente_id)
     VALUES ('Ortopedia',           '2026-05-17', 'CANCELADA',    2);
