@@ -104,6 +104,9 @@ public class ConsultaService {
     }
 
     public boolean excluirConsulta(long id) {
+        if (!consultaRepository.existsById(id)) {
+            return false;
+        }
         consultaRepository.deleteById(id);
         return true;
     }

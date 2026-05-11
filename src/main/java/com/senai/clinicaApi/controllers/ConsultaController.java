@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/consulta")
 public class ConsultaController {
-    private ConsultaService service;
+    private final ConsultaService service;
 
     public ConsultaController(ConsultaService service) {
         this.service = service;
