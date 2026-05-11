@@ -3,7 +3,6 @@ package com.senai.clinicaApi.services;
 import com.senai.clinicaApi.dtos.ConsultaDto;
 import com.senai.clinicaApi.entities.ConsultaEntity;
 import com.senai.clinicaApi.entities.PacienteEntity;
-import com.senai.clinicaApi.entities.StatusConsulta;
 import com.senai.clinicaApi.repositories.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -73,24 +72,6 @@ public class ConsultaService {
         consultaRepository.save(consultaEntity);
 
         return true;
-    }
-
-    public List<ConsultaDto> obterConsultaPorStatus(StatusConsulta status) {
-        List<ConsultaEntity> listaConsulta = consultaRepository.findByStatusConsulta(status);
-        List<ConsultaDto> listaDto = new ArrayList<>();
-
-        for (ConsultaEntity entity : listaConsulta) {
-            ConsultaDto consulta = new ConsultaDto();
-            consulta.setId(entity.getId());
-            consulta.setTitulo(entity.getTitulo());
-            consulta.setDataConsulta(entity.getDataConsulta());
-            consulta.setStatusConsulta(entity.getStatusConsulta());
-            consulta.setEmailPaciente(entity.getPaciente().getEmail());
-            listaDto.add(consulta);
-        }
-
-
-        return listaDto;
     }
 
     public boolean atualizarConsulta(long id, ConsultaDto dto) {
