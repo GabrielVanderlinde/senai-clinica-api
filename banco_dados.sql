@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS consulta (
     id             BIGINT AUTO_INCREMENT PRIMARY KEY,
     titulo         VARCHAR(255) NOT NULL,
     data_consulta  DATE NOT NULL,
-    statusConsulta         VARCHAR(50) NOT NULL,
+    status_consulta         VARCHAR(50) NOT NULL,
     paciente_id    BIGINT NOT NULL,
     FOREIGN KEY (paciente_id) REFERENCES paciente(id)
 );
