@@ -25,6 +25,9 @@ public class ConsultaEntity {
     @JoinColumn(name = "paciente_id")
     private PacienteEntity paciente;
 
+    @Column(name = "tipo_consulta")
+    private String tipoConsulta;
+
     public ConsultaEntity() {
     }
 
@@ -66,5 +69,13 @@ public class ConsultaEntity {
 
     public void setPaciente(PacienteEntity paciente) {
         this.paciente = paciente;
+    }
+
+    public String getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(String tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
     }
 }

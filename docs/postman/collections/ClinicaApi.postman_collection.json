@@ -162,22 +162,48 @@
         },
         {
           "name": "Excluir Consulta",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{ConsultaURL}}/8",
-              "host": [
-                "{{ConsultaURL}}"
-              ],
-              "path": [
-                "8"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ]
+					"description": "",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ConsultaURL}}/8",
+							"query": [],
+							"variable": [],
+							"host": [
+								"{{ConsultaURL}}/8"
+							]
+						}
+					},
+					"sort": 11
+				},
+				{
+					"name": "Cancelar Consulta",
+					"description": "",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{ConsultaURL}}/cancelar/8",
+							"query": [],
+							"variable": [],
+							"host": [
+								"{{ConsultaURL}}/cancelar/8"
+							]
+						}
+					},
+					"sort": 12
+				}
+			]
+		}
+	],
+	"variable": [],
+	"event": [],
+	"auth": {}
 }

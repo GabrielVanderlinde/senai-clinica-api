@@ -42,24 +42,21 @@ public class ConsultaService {
         return listaDto;
     }
 
-    //inserir
+    // inserir
     public boolean inserirConsulta(ConsultaDto consultaDto) {
 
-        //verifica se existe paciente pelo email
+        // verifica se existe paciente pelo email
         PacienteEntity paciente = pacienteRepository
                 .findByEmail(consultaDto.getEmailPaciente())
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Paciente não encontrado"
-                ));
+                        HttpStatus.NOT_FOUND, "Paciente não encontrado"));
 
-
-        //verifica se consulta ja ta marcada no mesmo dia
+        // verifica se consulta ja ta marcada no mesmo dia
         if (consultaRepository.existsByPacienteAndDataConsulta(
                 paciente, consultaDto.getDataConsulta())) {
 
             throw new ResponseStatusException(
-                    HttpStatus.CONFLICT, "Já existe consulta nessa data"
-            );
+                    HttpStatus.CONFLICT, "Já existe consulta nessa data");
         }
 
         ConsultaEntity consultaEntity = new ConsultaEntity();
@@ -67,6 +64,7 @@ public class ConsultaService {
         consultaEntity.setTitulo(consultaDto.getTitulo());
         consultaEntity.setDataConsulta(consultaDto.getDataConsulta());
         consultaEntity.setStatusConsulta(consultaDto.getStatusConsulta());
+        consultaEntity.setTipoConsulta(consultaDto.getTipoConsulta());
         consultaEntity.setPaciente(paciente);
 
         consultaRepository.save(consultaEntity);
@@ -79,15 +77,12 @@ public class ConsultaService {
         ConsultaEntity consulta = consultaRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Consulta não encontrada"
-                ));
-
+                        HttpStatus.NOT_FOUND, "Consulta não encontrada"));
 
         PacienteEntity paciente = pacienteRepository
                 .findByEmail(dto.getEmailPaciente())
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Paciente não encontrado"
-                ));
+                        HttpStatus.NOT_FOUND, "Paciente não encontrado"));
 
         if (consultaRepository.existsByPacienteAndDataConsultaAndIdNot(paciente, dto.getDataConsulta(), id)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Já existe consulta nessa data");
@@ -111,4 +106,17 @@ public class ConsultaService {
         return true;
     }
 
+    public boolean cancelarConsulta(long id) {
+
+        ConsultaEntity consulta = consultaRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Consulta não encontrada"));
+
+        consulta.setTitulo("Consulta Cancelada!");
+
+        consultaRepository.save(consulta);
+
+        return true;
+    }
 }

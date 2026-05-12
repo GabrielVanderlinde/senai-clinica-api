@@ -23,6 +23,9 @@ public class ConsultaDto {
     @Email
     private String emailPaciente;
 
+    @NotNull
+    private String tipoConsulta;
+
     public ConsultaDto() {
     }
 
@@ -62,7 +65,13 @@ public class ConsultaDto {
         return emailPaciente;
     }
 
-    public void setEmailPaciente(String emailPaciente) {
-        this.emailPaciente = emailPaciente;
+    public void setEmailPaciente(String emailPaciente) {this.emailPaciente = emailPaciente;}
+
+    public String getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(String tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
     }
 }

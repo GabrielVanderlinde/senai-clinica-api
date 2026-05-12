@@ -47,4 +47,11 @@ public class ConsultaController {
         if (!resposta) return ResponseEntity.status(404).body("Consulta não encontrada!");
         return ResponseEntity.ok("Consulta excluída com sucesso");
     }
+
+    @PostMapping("/cancelar/{id}")
+    public ResponseEntity<String> cancelarConsulta(@PathVariable Long id){
+        service.cancelarConsulta(id);
+
+        return ResponseEntity.ok().body("Consulta Cancelada!");
+    }
 }
