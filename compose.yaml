@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Serviço do Banco de Dados
+  db:
+    image: mysql:8.0
+    container_name: clinica-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clinica_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./banco_dados.sql:/docker-entrypoint-initdb.d/banco_dados.sql
+
+  # Serviço da API
+  api:
+    image: vanderlindegabriel/senai-clinica-api:latest
+    container_name: clinica-api
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://db:3306/clinica_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
