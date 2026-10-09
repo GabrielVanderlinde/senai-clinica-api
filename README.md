@@ -1,65 +1,54 @@
-# SENAI Clinic API
+# SENAI Clínica API
 
-Clinical management system developed as a course project for SENAI's Java Systems Development curriculum.
+Projeto acadêmico de uma API para apoiar operações de gerenciamento de clínica médica, desenvolvido para praticar programação backend com Java e Spring Boot.
 
-## Overview
-
-A clinical management system built for academic study and application of backend development concepts using Java and Spring Boot.
-
-## Tech Stack
+## Tecnologias
 
 - Java
 - Spring Boot
-- Spring Data JPA
-- Hibernate
+- Spring Data JPA e Hibernate
 - MySQL
 - Maven
 
-## Features
+## Funcionalidades
 
-- Clinic management operations
-- Professional API endpoints
-- Data persistence
-- Clean code architecture
+O projeto reúne operações de gerenciamento clínico e persistência de dados por meio de uma API. Consulte os controllers e serviços do código-fonte para verificar os endpoints disponíveis na versão atual.
 
-## Getting Started
+## Como executar
 
-### Prerequisites
+### Pré-requisitos
 
-- Java 17+
+- JDK compatível com a versão configurada no projeto
 - Maven
 - MySQL
 
-### Installation
+Clone o repositório:
 
 ```bash
 git clone https://github.com/GabrielVanderlinde/senai-clinica-api.git
 cd senai-clinica-api
 ```
 
-### Database configuration
+Configure a conexão com o banco de dados nas propriedades da aplicação. Exemplo ilustrativo:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost/clinica_db
-spring.datasource.username=root
-spring.datasource.password=root
+spring.datasource.username=SEU_USUARIO
+spring.datasource.password=SUA_SENHA
 ```
 
-### Run the application
+Execute a aplicação:
 
 ```bash
-mvn clean install
 mvn spring-boot:run
 ```
 
-## Notes
+> Os valores de banco de dados são exemplos. Ajuste-os ao seu ambiente e não versione credenciais reais.
 
-Project developed for learning and application of backend practices in Java and Spring Boot.
+## Objetivo
 
-## License
+Praticar desenvolvimento de APIs, organização em camadas e persistência com o ecossistema Spring.
 
-MIT
-
-## Author
+## Autor
 
 Gabriel Vanderlinde
